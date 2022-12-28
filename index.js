@@ -4,16 +4,15 @@
  * @date 12/20/22
  */
 
-exports.handler = async (event, context, callback) => {
-	const name = event.name;
+exports.handler = async event => {
+	const { name } = event; // Retrives the input
 
-	const body = {
-		msg: `Hello ${name}!`
-	};
+	const body = { msg: `Hello ${name}!` }; // Message to output
 
-	const res = {
-		statusCode: 200,
-		headers: {
+  // Send response back to UI:
+	return {
+		statusCode: 200, // Sets status to successful
+		headers: { // Sets headers:
 			'Content-Type': 'application/json',
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Credentials': true,
@@ -23,6 +22,4 @@ exports.handler = async (event, context, callback) => {
 		},
 		body: JSON.stringify(body)
 	};
-
-  return callback(null, res);
 };
