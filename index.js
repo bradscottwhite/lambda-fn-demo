@@ -5,11 +5,15 @@
  */
 
 exports.handler = async event => {
-	const { name } = event; // Retrives the input
+	let body = {};
+	
+	if (event.body !== null && event.body !== undefined) {
+    	let { name } = JSON.parse(event.body); // Retrives the input
 
-	const body = { msg: `Hello ${name}!` }; // Message to output
-
-  // Send response back to UI:
+		body = { msg: `Hello ${name}!` }; // Message to output
+	}
+	
+	// Send response back to UI:
 	return {
 		statusCode: 200, // Sets status to successful
 		headers: { // Sets headers:
